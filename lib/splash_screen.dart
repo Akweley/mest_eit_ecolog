@@ -1,6 +1,5 @@
-import 'package:flutter/material.dart';
 import 'dart:async';
-//import 'package:ecolog/welcome_screen.dart';
+import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -10,24 +9,20 @@ class SplashScreen extends StatefulWidget {
 }
 
 class _SplashScreenState extends State<SplashScreen> {
+  void startTimer() {
+    const oneSec = Duration(seconds: 3);
 
-void startTimer() {
-  const oneSec = Duration(seconds: 3);
-  Timer.periodic(
-    oneSec,
-    (Timer timer) {
-      print("Timed: ");
-      Navigator.of(context).pushNamed("/welcome");
-      // Navigator.of(context)
-      // .push(MaterialPageRoute(builder: (BuildContext context) {
-      // return const WelcomeScreen();
-      // }));
-      timer.cancel();
-    },
-  );
-}
+    Timer.periodic(
+      oneSec,
+      (Timer timer) {
+        print("Timed: ");
+        Navigator.of(context).pushNamed("/welcome");
+        timer.cancel();
+      },
+    );
+  }
 
-@override
+  @override
   void initState() {
     startTimer();
     super.initState();
@@ -36,29 +31,46 @@ void startTimer() {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.green,
+      color: const Color(0xFF24A365),
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           ClipOval(
             child: Container(
-              padding: const EdgeInsets.all(16),
-              color: Colors.white.withAlpha(100),
-              child: const Icon(Icons.language,
-                  color: Colors.white, 
-                  size: 50),
+              padding: const EdgeInsets.all(8),
+              color: Colors.white.withAlpha(40),
+              child: Image.asset(
+                "assets/rest1.png",
+                width: 40,
+                height: 40,
+                color: Colors.white,
+              ),
             ),
           ),
-          Text(
-          "Ecolog",
-          style: TextStyle(
-            fontSize: 24,
-            decoration: TextDecoration.none,
-            color: Colors.white),
+          Padding(
+            padding: const EdgeInsets.all(8),
+            child: RichText(
+              text: const TextSpan(
+                text: 'Eco',
+                style: TextStyle(
+                    fontSize: 30,
+                    fontWeight: FontWeight.bold,
+                    decoration: TextDecoration.none,
+                    color: Colors.white),
+                children: <TextSpan>[
+                  TextSpan(
+                      text: 'Log',
+                      style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                          decoration: TextDecoration.none,
+                          color: Colors.black)),
+                ],
+              ),
             ),
+          ),
         ],
       ),
     );
   }
 }
-
